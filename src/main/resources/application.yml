@@ -1,0 +1,32 @@
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: chat_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #아래값은 조회시 브로커가 전송할 최소 데이터 크기 (숫자가 커질수록 데이터 처리량은 증가하지만 속도는 DOWN def:1)
+      fetch-min-size: 2
+      #자동 커밋 주기(4초 def:5000)
+      auto-commit-interval: 4000
+      enable-auto-commit: true
+      #위 fetch min size
+      fetch-max-wait: 500MS
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+logging:
+  level:
+    root: info
+    org.springframework: info
+    kr.legossol.Kafka: debug
+  logback:
+    rollingpolicy:
+      clean-history-on-start: false
+      max-file-size: 10MB
+      total-size-cap: 500MB
+      max-history: 0
+server:
+  port: 8090
