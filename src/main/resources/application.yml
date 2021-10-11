@@ -5,7 +5,7 @@ spring:
       group-id: chat_group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       #아래값은 조회시 브로커가 전송할 최소 데이터 크기 (숫자가 커질수록 데이터 처리량은 증가하지만 속도는 DOWN def:1)
       fetch-min-size: 2
       #자동 커밋 주기(4초 def:5000)
@@ -16,7 +16,7 @@ spring:
     producer:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 logging:
   level:
     root: info
