@@ -2,10 +2,15 @@
 
 ## 카프카의 이론과 원리 구현을 학습하기 위해 샘플로 만들어 보는 디렉토리 입니다.
 
+##방향성
+ - 토픽,파티션,레플리카등 bean설정과 관련된부분을 yml,xml로 처리할지 개별 bean 등록으로 처리할지(미정)
+
 ## 카프카 사용 명령어
 docker-compose 실행
 프로젝트 내의 docker-compse
 $docker-compose -f docker-compose.yml up
+or
+$docker-compose up -d
 
 카프카 서버에 접속(iterm)
  -카프카에 접속(우선)
@@ -15,9 +20,11 @@ $docker-compose -f docker-compose.yml up
  - 존재하는 토픽 name만 확인
 -> kafka-topics.sh --list --bootstrap-server localhost:9092
  - 토픽 상세 확인
--> kafka-topics.sh --bootstrap-server localhost:9092 --topic chat_topic --describe
+-> kafka-topics.sh --bootstrap-server localhost:9092 --topic chat --describe
  - 컨슈머 key-value확인
 -> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic chat_topic --property print.key=true --property key.separator="-"
+ - 파티션, offset 확인
+-> kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group chat_group --describe
 ```
  키기 zookeeper -> server
 /usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties
