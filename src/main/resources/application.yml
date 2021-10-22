@@ -30,3 +30,27 @@ logging:
       max-history: 0
 server:
   port: 8090
+
+---
+spring:
+  profiles:
+    active: aws-dev
+  kafka:
+    consumer:
+      bootstrap-servers: ec2-3-36-62-174.ap-northeast-2.compute.amazonaws.com:9092
+      group-id: chat_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      #아래값은 조회시 브로커가 전송할 최소 데이터 크기 (숫자가 커질수록 데이터 처리량은 증가하지만 속도는 DOWN def:1)
+      fetch-min-size: 2
+      #자동 커밋 주기(4초 def:5000)
+      auto-commit-interval: 4000
+      enable-auto-commit: true
+      #위 fetch min size
+      fetch-max-wait: 500MS
+    producer:
+      bootstrap-servers: ec2-3-36-62-174.ap-northeast-2.compute.amazonaws.com:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+---
