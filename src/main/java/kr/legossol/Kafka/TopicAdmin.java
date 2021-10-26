@@ -1,35 +1,41 @@
 package kr.legossol.Kafka;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.kafka.clients.admin.AdminClientConfig;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
+import org.springframework.kafka.core.KafkaAdmin;
+import org.springframework.kafka.core.KafkaAdmin.NewTopics;
 
 @Configuration
 public class TopicAdmin {
-//  @Value("${kafka.bootstrap-servers}")
-//  private String bootstrapserver;
+  @Value("${spring.kafka.producer.bootstrap-servers}")
+  private String bootstrapserver;
 
-//  @Bean
-//  public KafkaAdmin admin(){
-//    Map<String, Object> config = new HashMap<>();
-//    config.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-//    return new KafkaAdmin(config);
-//  }
-//
-//  /**
-//   * 2.7버전 부터는 아래와같이 만드는것이 가능
-//   * **/
-//  @Bean
-//  public KafkaAdmin.NewTopics topicsGenerator(){
-//    return new NewTopics(
-//        TopicBuilder.name("chatting")
-//            .partitions(3)
-//            .replicas(3)
-//            .build(),
-//        TopicBuilder.name("project")
-//            .partitions(1)
-//            .build());
-//  }
+  @Bean
+  public KafkaAdmin admin(){
+    Map<String, Object> config = new HashMap<>();
+    config.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    return new KafkaAdmin(config);
+  }
 
-
+  /**
+   * 2.7버전 부터는 아래와같이 만드는것이 가능
+   * **/
+  @Bean
+  public KafkaAdmin.NewTopics topicsGenerator(){
+    return new NewTopics(
+        TopicBuilder.name("chat")
+            .partitions(3)
+            .replicas(2)
+            .build(),
+        TopicBuilder.name("adminTopic")
+            .partitions(2)
+            .build());
+  }
     /*2.5버전이하에서는 아래와같은 식으로 만들어왔다.*/
 
 //  @Bean
