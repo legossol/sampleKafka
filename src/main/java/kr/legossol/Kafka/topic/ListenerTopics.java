@@ -12,7 +12,7 @@ public class ListenerTopics {
 
   public void showTopicInfo() throws ExecutionException, InterruptedException {
     Properties topicConfig = new Properties();
-    topicConfig.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    topicConfig.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9094,localhost:9092,localhost:9093");
     AdminClient admin = AdminClient.create(topicConfig);
 
     for(TopicListing topicListing : admin.listTopics().listings().get()){
