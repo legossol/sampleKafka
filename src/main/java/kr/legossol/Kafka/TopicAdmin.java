@@ -12,30 +12,30 @@ import org.springframework.kafka.core.KafkaAdmin.NewTopics;
 
 @Configuration
 public class TopicAdmin {
-  @Value("${spring.kafka.producer.bootstrap-servers}")
-  private String bootstrapserver;
-
-  @Bean
-  public KafkaAdmin admin(){
-    Map<String, Object> config = new HashMap<>();
-    config.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-    return new KafkaAdmin(config);
-  }
-
-  /**
-   * 2.7버전 부터는 아래와같이 만드는것이 가능
-   * **/
-  @Bean
-  public KafkaAdmin.NewTopics topicsGenerator(){
-    return new NewTopics(
-        TopicBuilder.name("chat")
-            .partitions(3)
-            .replicas(2)
-            .build(),
-        TopicBuilder.name("adminTopic")
-            .partitions(2)
-            .build());
-  }
+//  @Value("${spring.kafka.producer.bootstrap-servers}")
+//  private String bootstrapserver;
+//
+//  @Bean
+//  public KafkaAdmin admin(){
+//    Map<String, Object> config = new HashMap<>();
+//    config.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9091, localhost:9092, localhost:9093");
+//    return new KafkaAdmin(config);
+//  }
+//
+//  /**
+//   * 2.7버전 부터는 아래와같이 만드는것이 가능
+//   * **/
+//  @Bean
+//  public KafkaAdmin.NewTopics topicsGenerator(){
+//    return new NewTopics(
+//        TopicBuilder.name("chat")
+//            .partitions(3)
+//            .replicas(2)
+//            .build(),
+//        TopicBuilder.name("adminTopic")
+//            .partitions(2)
+//            .build());
+//  }
     /*2.5버전이하에서는 아래와같은 식으로 만들어왔다.*/
 
 //  @Bean
