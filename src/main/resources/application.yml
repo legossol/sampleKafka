@@ -39,9 +39,6 @@ logging:
       total-size-cap: 500MB
       max-history: 0
 server:
-<<<<<<< Updated upstream
-  port: 8090
-=======
   port: 8090
 
 ---
@@ -67,4 +64,3 @@ server:
 #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 ---
->>>>>>> Stashed changes

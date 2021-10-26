@@ -36,8 +36,6 @@ public class TopicAdmin {
             .partitions(2)
             .build());
   }
-
-
     /*2.5버전이하에서는 아래와같은 식으로 만들어왔다.*/
 
 //  @Bean

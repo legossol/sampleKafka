@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("/kafka")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 @Slf4j
 public class KafkaController {
@@ -31,19 +31,21 @@ public class KafkaController {
 //        return "success";
 //    }
 
-    @PostMapping("/publish")
+    @PostMapping("/send")
     public void sendingMessage(@RequestBody Message message){
-        log.info("Produce message : " + message.toString());
+
         message.setTimeStamp(LocalDateTime.now().toString());
+        log.info("GENERATE TOPIC DUE TO USER SEND MESSAGE : " + message.toString());
         try{
             producer.sendMessage(message);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
     }
-    @MessageMapping("sendingMessage")
-    @SendTo("/topic/group")
-    public Message broadcastGroupMessage(@Payload Message message){
-        return message;
-    }
+//    @MessageMapping("sendingMessage")
+//    @SendTo("/topic/group")
+//    public Message broadcastGroupMessage(@Payload Message message){
+//        return message;
+//    }
+
 }

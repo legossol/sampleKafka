@@ -24,12 +24,18 @@ public class Producer {
     public Producer(KafkaTemplate kafkaTemplate){
         this.kafkaTemplate = kafkaTemplate;
     }
+
+//    @Getter
+//    @ToString
+//    public static class detailMessage{}
+
+
     public void sendMessage(Message message){
-        log.info(String.format("Produce message : %s",message));
 
         this.kafkaTemplate.send(TOPIC,message);
         ListenableFuture<SendResult<String,Message>> future =
                 kafkaTemplate.send(TOPIC, kafkaTemplate.getTransactionIdPrefix(),message);
+
 
         future.addCallback(new ListenableFutureCallback<SendResult<String, Message>>() {
             @Override
