@@ -33,11 +33,9 @@ public class KafkaController {
 
     @PostMapping("/send")
     public void sendingMessage(@RequestBody Message message){
-
-        message.setTimeStamp(LocalDateTime.now().toString());
         log.info("GENERATE TOPIC DUE TO USER SEND MESSAGE : " + message.toString());
         try{
-            producer.sendMessage(message);
+            producer.sendMessage(message.toDto());
         }catch (Exception e){
             throw new RuntimeException(e);
         }
