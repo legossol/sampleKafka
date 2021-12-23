@@ -25,6 +25,12 @@ $docker-compose up -d
 -> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic chat_topic --property print.key=true --property key.separator="-"
  - 파티션, offset 확인
 -> kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group chat_group --describe
+### if 외부 내부 접속이 다르다면
+ 
+-> kafka-topics.sh --bootstrap-server  LISTENER_DOCKER_INTERNAL://kafka1:19092 --topic site --describe
+-> kafka-topics.sh --list --bootstrap-server  LISTENER_DOCKER_INTERNAL://kafka2:19092
+-> kafka-console-producer.sh --bootstrap-server LISTENER_DOCKER_INTERNAL://kafka1:19092 --topic parttest --property "parse.key=true" --property "key.separator=:" --property "print.key=true"
+->kafka-console-consumer.sh --bootstrap-server LISTENER_DOCKER_INTERNAL://kafka2:19093 --topic parttest --property "parse.key=true" --property "key.separate=:" --property "print.key=true" --from-beginning --formatter kafka.tools.DefaultMessageFormatter
 ```
  키기 zookeeper -> server
 /usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties
