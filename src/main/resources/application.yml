@@ -27,6 +27,7 @@ spring:
           json:
             trusted:
               packages: kr.legossol.Kafka.messageDto
+
 logging:
   level:
     root: info

@@ -1,10 +1,14 @@
 package kr.legossol.Kafka;
 
-import org.apache.kafka.clients.producer.internals.FutureRecordMetadata;
-import org.apache.kafka.clients.producer.internals.ProducerBatch;
+import kr.legossol.Kafka.messageDto.Message;
+import kr.legossol.Kafka.service.AssignPartitionProducer;
+import kr.legossol.Kafka.service.Producer;
 import org.junit.jupiter.api.Test;
-import org.springframework.kafka.KafkaException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Component;
 
+@SpringBootTest
 public class KafkaTest {
 
 //  @Test
@@ -32,5 +36,37 @@ public class KafkaTest {
 //      assertEquals(exception, e.getCause());
 //    }
 //  }
+  @Autowired
+  private AssignPartitionProducer producer;
+
+
+
+  @Test
+  public void Test() throws InterruptedException {
+    Message message = new Message();
+        message.setAuthor("테스트 진행자");
+    message.setContent(
+        "나야나"
+//            + "두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두"
+//            + "루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhh두루두루hhhdurl여기까지왔어 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 "
+//            + "이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 "
+//            + "왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 "
+//            + "진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 "
+//            + "이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜"
+//            + " 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 "
+//            + "왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 "
+//            + "이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 "
+//            + "진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼"
+//            + " 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜"
+//            + " 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어"
+//            + " 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜 내가 이만큼 왔어 진짜 이만큼 왔어 진짜 잘했지 진짜"
+    );
+
+//    for(int i = 5; i < 25; i++){
+//      message.setCnt(i);
+      producer.partitionSend(message);
+//      Thread.sleep(4000);
+//    }
+  }
 
 }
